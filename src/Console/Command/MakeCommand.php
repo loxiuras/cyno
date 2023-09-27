@@ -54,7 +54,12 @@ class MakeCommand extends Command
         return $location . $this->filename . self::FILE_EXTENSION;
     }
 
-    private function getPostfixedFilename(): string
+    private function getClassNamespace(): string
+    {
+        return 'Cyno\BusinessLogic\Schade';
+    }
+
+    private function getClassName(): string
     {
         return match ($this->attribute) {
             'service' => $this->filename . 'Service',
@@ -99,13 +104,13 @@ class MakeCommand extends Command
         $path = __DIR__ . '/../../../stubs/' . $this->attribute . '.stub';
 
         if (!file_exists($path)) {
-            fwrite(STDERR, '[ERROR] ' . ucfirst($this->attribute) . ' isn\'t available.');
+            fwrite(STDERR, '[ERROR] ' . ucfirst($this->attribute) . ' stub isn\'t available.');
             exit(Command::FAILURE);
         }
 
         $stub = file_get_contents($path);
-        $stub = str_replace('%namespace%', 'Cyno\BusinessLogic\Schade', $stub);
-        $stub = str_replace('%classname%', $this->getPostfixedFilename(), $stub);
+        $stub = str_replace('%namespace%', $this->getClassNamespace(), $stub);
+        $stub = str_replace('%classname%', $this->getClassName(), $stub);
 
         $this->stub = $stub;
     }
