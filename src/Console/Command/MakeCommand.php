@@ -43,7 +43,7 @@ class MakeCommand extends Command
         fwrite(STDERR, '[SUCCESS] ' . ucfirst($this->attribute) . ' [' . $this->getFileLocation(true) . '] created successfully.');
     }
 
-    private function getFileLocation(bool $includeComposeLocation = false): string
+    private function getFileDirectoryLocation(bool $includeComposeLocation = false): string
     {
         $location = $includeComposeLocation ? getcwd() . DIRECTORY_SEPARATOR : '';
 
@@ -51,7 +51,12 @@ class MakeCommand extends Command
             $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories) . DIRECTORY_SEPARATOR;
         }
 
-        return $location . $this->filename . self::FILE_EXTENSION;
+        return $location;
+    }
+
+    private function getFileLocation(bool $includeComposeLocation = false): string
+    {
+        return $this->getFileDirectoryLocation($includeComposeLocation) . $this->filename . self::FILE_EXTENSION;
     }
 
     private function getClassNamespace(): string
@@ -117,6 +122,10 @@ class MakeCommand extends Command
 
     public function saveFile(): void
     {
+        if (!is_dir($this->getFileDirectoryLocation(true))) {
+            mkdir($this->getFileDirectoryLocation(true));
+        }
+
         file_put_contents(
             str_replace('/', '\\', $this->getFileLocation(true)),
             $this->stub,
