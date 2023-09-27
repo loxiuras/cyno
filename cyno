@@ -1,7 +1,4 @@
 #!/usr/bin/env php
 <?php
 
-Use Cyno\Console\Application;
-
-$application = new Application();
-$application->run();
+echo PHP_VERSION_ID;
