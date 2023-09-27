@@ -77,15 +77,9 @@ class MakeCommand extends Command
      */
     private function getFileStructure(): void
     {
-        $filename = str_replace('\\', DIRECTORY_SEPARATOR, $this->input->getArgument('name'));
+        $filename = $this->input->getArgument('name');
 
-        var_dump($filename);
-        var_dump(explode(DIRECTORY_SEPARATOR, $filename));
-        die;
-
-
-
-        $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
+        $fileStructure = explode('/', trim($filename));
         if (count($fileStructure) > 1) {
             $fileIndex = count($fileStructure) - 1;
             $filename  = $fileStructure[$fileIndex];
@@ -93,6 +87,9 @@ class MakeCommand extends Command
             unset($fileStructure[$fileIndex]);
 
             $this->fileDirectories = array_filter($fileStructure);
+            $this->filename = $filename;
+
+            return;
         }
 
         $this->filename = $fileStructure[0];
