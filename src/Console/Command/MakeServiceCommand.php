@@ -26,10 +26,7 @@ class MakeServiceCommand extends MakeCommand
         $filename = $this->getFilename();
         $stub     = $this->getStub('service');
 
-        var_dump($filename);
-        var_dump("\n");
-        var_dump($stub);
-        die;
+        fwrite(STDERR, "Service created successfully...");
 
         return Command::SUCCESS;
     }

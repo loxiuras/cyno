@@ -43,7 +43,7 @@ class MakeCommand extends Command
 
         if (!file_exists($path)) {
             fwrite(STDERR, "Stub of $name isn't found... try again later. Search path: $path");
-            exit(1);
+            exit(Command::FAILURE);
         }
 
         $stub = file_get_contents($path);
