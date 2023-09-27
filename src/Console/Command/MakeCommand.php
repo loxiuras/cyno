@@ -47,6 +47,8 @@ class MakeCommand extends Command
     {
         $location = $includeComposeLocation ? getcwd() . DIRECTORY_SEPARATOR : '';
 
+        var_dump($this->fileDirectories);
+
         if (count($this->fileDirectories) > 0) {
             $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories) . DIRECTORY_SEPARATOR;
         }
