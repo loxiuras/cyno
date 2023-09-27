@@ -25,6 +25,8 @@ class MakeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        die('End...');
+
         return 0;
     }
 }
