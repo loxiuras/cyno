@@ -48,7 +48,7 @@ class MakeCommand extends Command
         $location = $includeComposeLocation ? getcwd() . DIRECTORY_SEPARATOR : '';
 
         if (count($this->fileDirectories) > 0) {
-            $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories) . DIRECTORY_SEPARATOR;
+            $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories);
         }
 
         return $location;
@@ -56,7 +56,7 @@ class MakeCommand extends Command
 
     private function getFileLocation(bool $includeComposeLocation = false): string
     {
-        return $this->getFileDirectoryLocation($includeComposeLocation) . $this->filename . self::FILE_EXTENSION;
+        return $this->getFileDirectoryLocation($includeComposeLocation) . DIRECTORY_SEPARATOR . $this->filename . self::FILE_EXTENSION;
     }
 
     private function getClassNamespace(): string
