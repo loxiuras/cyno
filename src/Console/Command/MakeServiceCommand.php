@@ -20,10 +20,10 @@ class MakeServiceCommand extends MakeCommand
     #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->setInput($input);
-
-        $filename = $this->getFilename();
-        $stub     = $this->getStub('service');
+        $this->setup($input);
+//
+//        $filename = $this->getFilenameStructure();
+//        $stub     = $this->getStub('service');
 
         fwrite(STDERR, "Service created successfully...");
 

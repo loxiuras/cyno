@@ -10,48 +10,73 @@ use Symfony\Component\Console\Input\InputInterface;
 
 class MakeCommand extends Command
 {
-    public const NAMESPACE = '%namespace%';
+    private const FILE_SEPERATOR = '/';
+    private const FILE_EXTENSION = '.php';
 
     private InputInterface $input;
-
-    public function setInput(InputInterface $input): void
-    {
-        $this->input = $input;
-    }
+    protected string $filename;
+    protected array $fileDirectories = [];
 
     public function configure(): void
     {
         $this->setDefinition([
-            new InputArgument('filename', InputArgument::REQUIRED, 'Name of file.'),
+            new InputArgument('name', InputArgument::REQUIRED, 'Name of file.'),
         ]);
     }
 
-    public function getFilename(): string
+    public function setup(InputInterface $input): void
     {
-        $filename = $this->input->getArgument('filename');
+        $this->input = $input;
 
-        if (str_ends_with($filename, '.php')) {
-            return substr($filename, 0, -4);
-        }
+        $this->getFileStructure();
 
-        return $filename;
+        $this->validateFileLocation();
     }
 
-    public function getStub(string $name, bool $replaceNamespace = true)
+    private function getFileLocation(bool $includeComposeLocation = false): string
     {
-        $path = __DIR__ . '/../../../stubs/' . $name . '.stub';
+        $location = $includeComposeLocation ? __DIR__ : '';
 
-        if (!file_exists($path)) {
-            fwrite(STDERR, "Stub of $name isn't found... try again later. Search path: $path");
+        if (count($this->fileDirectories) > 0) {
+            $location = implode('/', $this->fileDirectories);
+        }
+
+        return $location . '/' . $this->filename . self::FILE_EXTENSION;
+    }
+
+    /**
+     * Setting the file and file structure based on the given input.
+     */
+    private function getFileStructure(): void
+    {
+        $filename = $this->input->getArgument('name');
+
+        if (str_contains($filename, self::FILE_SEPERATOR)) {
+            $fileStructure = explode(self::FILE_SEPERATOR, $filename);
+
+            $fileIndex = count($fileStructure) - 1;
+            $filename  = $fileStructure[$fileIndex];
+
+            unset($fileStructure[$fileIndex]);
+
+            $this->fileDirectories = array_filter($fileStructure);
+        }
+
+        $this->filename = $filename;
+    }
+
+    /**
+     * Validate if the provided file is available in the repository.
+     */
+    private function validateFileLocation(): void
+    {
+        var_dump($this->getFileLocation());
+        var_dump($this->getFileLocation(true));
+        die;
+
+        if (file_exists($this->getFileLocation(true))) {
+            fwrite(STDERR, 'Oops, looks like the provided file already exists!');
             exit(Command::FAILURE);
         }
-
-        $stub = file_get_contents($path);
-
-        if ($replaceNamespace) {
-            $stub = str_replace(self::NAMESPACE, 'Cyno/BusinessLogic/Schade', $stub);
-        }
-
-        return $stub;
     }
 }
