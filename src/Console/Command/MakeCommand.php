@@ -77,7 +77,14 @@ class MakeCommand extends Command
      */
     private function getFileStructure(): void
     {
+        var_dump($this->input->getArgument('name'));
+
         $filename = str_replace('\\', DIRECTORY_SEPARATOR, $this->input->getArgument('name'));
+
+        var_dump($filename);
+        var_dump(str_contains($filename, DIRECTORY_SEPARATOR));
+        var_dump(str_contains($filename, '\\'));
+        die;
 
         if (str_contains($filename, DIRECTORY_SEPARATOR)) {
             $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
