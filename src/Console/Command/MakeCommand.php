@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputInterface;
 
 class MakeCommand extends Command
 {
-    private const FILE_SEPERATOR = '/';
     private const FILE_EXTENSION = '.php';
 
     private InputInterface $input;
@@ -35,10 +34,10 @@ class MakeCommand extends Command
 
     private function getFileLocation(bool $includeComposeLocation = false): string
     {
-        $location = $includeComposeLocation ? __DIR__ . self::FILE_SEPERATOR : '';
+        $location = $includeComposeLocation ? __DIR__ . DIRECTORY_SEPARATOR : '';
 
         if (count($this->fileDirectories) > 0) {
-            $location .= implode(self::FILE_SEPERATOR, $this->fileDirectories) . self::FILE_SEPERATOR;
+            $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories) . DIRECTORY_SEPARATOR;
         }
 
         return $location . $this->filename . self::FILE_EXTENSION;
@@ -51,8 +50,8 @@ class MakeCommand extends Command
     {
         $filename = $this->input->getArgument('name');
 
-        if (str_contains($filename, self::FILE_SEPERATOR)) {
-            $fileStructure = explode(self::FILE_SEPERATOR, $filename);
+        if (str_contains($filename, DIRECTORY_SEPARATOR)) {
+            $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
 
             $fileIndex = count($fileStructure) - 1;
             $filename  = $fileStructure[$fileIndex];
@@ -72,6 +71,7 @@ class MakeCommand extends Command
     {
         var_dump($this->getFileLocation());
         var_dump($this->getFileLocation(true));
+        var_dump(getcwd());
         die;
 
         if (file_exists($this->getFileLocation(true))) {
