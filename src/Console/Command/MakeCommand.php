@@ -47,8 +47,6 @@ class MakeCommand extends Command
     {
         $location = $includeComposeLocation ? getcwd() . DIRECTORY_SEPARATOR : '';
 
-        var_dump($this->fileDirectories);
-
         if (count($this->fileDirectories) > 0) {
             $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories) . DIRECTORY_SEPARATOR;
         }
@@ -79,7 +77,7 @@ class MakeCommand extends Command
      */
     private function getFileStructure(): void
     {
-        $filename = str_replace('\\', DIRECTORY_SEPARATOR, $this->input->getArgument('name');
+        $filename = str_replace('\\', DIRECTORY_SEPARATOR, $this->input->getArgument('name'));
 
         if (str_contains($filename, DIRECTORY_SEPARATOR)) {
             $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
