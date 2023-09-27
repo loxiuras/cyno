@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cyno\Console;
 
 use Cyno\Console\Command\MakeServiceCommand;
+use Cyno\Console\Command\MakeWebserviceCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 
 
@@ -17,5 +18,6 @@ class Application extends BaseApplication
         parent::__construct('cyno', self::VERSION);
 
         $this->add(new MakeServiceCommand());
+        $this->add(new MakeWebserviceCommand());
     }
 }
