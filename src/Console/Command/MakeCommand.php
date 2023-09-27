@@ -13,6 +13,7 @@ class MakeCommand extends Command
     private const FILE_EXTENSION = '.php';
 
     private InputInterface $input;
+    protected string $attribute;
     protected string $filename;
     protected array $fileDirectories = [];
 
@@ -70,7 +71,7 @@ class MakeCommand extends Command
     private function validateFileLocation(): void
     {
         if (file_exists($this->getFileLocation(true))) {
-            fwrite(STDERR, 'Oops, looks like the provided file already exists!');
+            fwrite(STDERR, '[ERRPR] ' . ucfirst($this->attribute) . ' already exists.');
             exit(Command::FAILURE);
         }
     }

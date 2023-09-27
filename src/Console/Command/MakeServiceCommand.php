@@ -17,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class MakeServiceCommand extends MakeCommand
 {
+    protected string $attribute = 'service';
+
     #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
