@@ -1,4 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-echo PHP_VERSION_ID;
+if (\PHP_VERSION_ID > 80000) {
+    fwrite(STDERR, 'CYNO required a PHP version of 8.0.0 or higher.');
+
+    exit(1);
+}
