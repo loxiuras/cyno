@@ -1,4 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-echo 'Hello world';
+Use Cyno\Console\Application;
+
+$application = new Application();
+$application->run();
