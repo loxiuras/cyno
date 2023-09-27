@@ -48,6 +48,14 @@ class MakeCommand extends Command
         return $location . $this->filename . self::FILE_EXTENSION;
     }
 
+    private function getPostfixedFilename(): string
+    {
+        return match ($this->attribute) {
+            'service' => $this->filename . 'Service',
+            default => '',
+        };
+    }
+
     /**
      * Setting the file and file structure based on the given input.
      */
@@ -91,6 +99,7 @@ class MakeCommand extends Command
 
         $stub = file_get_contents($path);
         $stub = str_replace('%namespace%', 'Cyno/BusinessLogic/Schade', $stub);
+        $stub = str_replace('%classname%', $this->getPostfixedFilename(), $stub);
 
         file_put_contents($this->getFileLocation(true), $stub);
     }

@@ -6,7 +6,7 @@ namespace %namespace%;
 
 use Cyno\Framework\Service\AbstractCyno;
 
-class %className% extends AbstractCyno
+class %classname% extends AbstractCyno
 {
 
 }
