@@ -35,10 +35,10 @@ class MakeCommand extends Command
 
     private function getFileLocation(bool $includeComposeLocation = false): string
     {
-        $location = $includeComposeLocation ? __DIR__ : '';
+        $location = $includeComposeLocation ? __DIR__ . self::FILE_SEPERATOR : '';
 
         if (count($this->fileDirectories) > 0) {
-            $location = implode('/', $this->fileDirectories) . '/';
+            $location .= implode(self::FILE_SEPERATOR, $this->fileDirectories) . self::FILE_SEPERATOR;
         }
 
         return $location . $this->filename . self::FILE_EXTENSION;
