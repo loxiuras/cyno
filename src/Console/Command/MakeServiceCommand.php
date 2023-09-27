@@ -28,11 +28,12 @@ class MakeServiceCommand extends MakeCommand
     #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $stub = $this->getFetchStub('service');
+        $filename = $this->validateFilename($input->getArgument('name'));
 
-        var_dump($input->getArgument('name'));
-        var_dump("\n");
-        var_dump($stub);
+        var_dump($filename);
+        die;
+
+        $stub = $this->getFetchStub('service');
 
         return Command::SUCCESS;
     }

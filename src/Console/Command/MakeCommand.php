@@ -10,6 +10,15 @@ class MakeCommand extends Command
 {
     public const NAMESPACE = '%namespace%';
 
+    public function validateFilename(string $filename): string
+    {
+        if (str_ends_with($filename, '.php')) {
+            return substr($filename, -4, 0);
+        }
+
+        return $filename;
+    }
+
     public function getFetchStub(string $name, bool $replaceNamespace = true)
     {
         $path = __DIR__ . '/../../../stubs/' . $name . '.stub';
