@@ -34,7 +34,7 @@ class MakeCommand extends Command
 
     private function getFileLocation(bool $includeComposeLocation = false): string
     {
-        $location = $includeComposeLocation ? __DIR__ . DIRECTORY_SEPARATOR : '';
+        $location = $includeComposeLocation ? getcwd() . DIRECTORY_SEPARATOR : '';
 
         if (count($this->fileDirectories) > 0) {
             $location .= implode(DIRECTORY_SEPARATOR, $this->fileDirectories) . DIRECTORY_SEPARATOR;
@@ -69,11 +69,6 @@ class MakeCommand extends Command
      */
     private function validateFileLocation(): void
     {
-        var_dump($this->getFileLocation());
-        var_dump($this->getFileLocation(true));
-        var_dump(getcwd());
-        die;
-
         if (file_exists($this->getFileLocation(true))) {
             fwrite(STDERR, 'Oops, looks like the provided file already exists!');
             exit(Command::FAILURE);
