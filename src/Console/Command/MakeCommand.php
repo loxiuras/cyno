@@ -36,7 +36,7 @@ class MakeCommand extends Command
 
         $this->prepareStub();
 
-        if ($this->customStubProcessing) {
+        if (!$this->customStubProcessing) {
             $this->saveFile();
         }
 
