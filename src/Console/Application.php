@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cyno\Console;
 
-use Cyno\Console\Command\MakeCommand;
+use Cyno\Console\Command\MakeServiceCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 
 
@@ -16,6 +16,6 @@ class Application extends BaseApplication
     {
         parent::__construct('cyno', self::VERSION);
 
-        $this->add(new MakeCommand());
+        $this->add(new MakeServiceCommand());
     }
 }
