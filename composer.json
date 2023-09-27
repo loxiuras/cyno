@@ -9,8 +9,5 @@
             "Cyno\\": "src/"
         }
     },
-    "scripts": {
-        "cyno": "echo 'Hello'"
-    },
     "minimum-stability": "stable"
 }
