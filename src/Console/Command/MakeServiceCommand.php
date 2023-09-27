@@ -18,22 +18,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class MakeServiceCommand extends MakeCommand
 {
-    protected function configure(): void
-    {
-        $this->setDefinition([
-            new InputArgument('name', InputArgument::REQUIRED, 'Name of file.'),
-        ]);
-    }
-
     #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $filename = $this->validateFilename($input->getArgument('name'));
+        $this->setInput($input);
+
+        $filename = $this->getFilename();
+        $stub     = $this->getStub('service');
 
         var_dump($filename);
+        var_dump("\n");
+        var_dump($stub);
         die;
-
-        $stub = $this->getFetchStub('service');
 
         return Command::SUCCESS;
     }
