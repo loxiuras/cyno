@@ -8,7 +8,9 @@ use Symfony\Component\Console\Command\Command;
 
 class MakeCommand extends Command
 {
-    public function getFetchStub(string $name)
+    public const NAMESPACE = '%namespace%';
+
+    public function getFetchStub(string $name, bool $replaceNamespace = true)
     {
         $path = __DIR__ . '/../../../stubs/' . $name . '.stub';
 
@@ -17,6 +19,8 @@ class MakeCommand extends Command
             exit(1);
         }
 
-        return file_get_contents($path);
+        $stub = file_get_contents($path);
+
+        return str_replace(self::NAMESPACE, 'Cyno/BusinessLogic/Schade', $stub);
     }
 }
