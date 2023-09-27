@@ -11,11 +11,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'make:service',
-    description: 'Creates a new service file.',
+    name: 'make:webservice',
+    description: 'Creates a new webservice file.',
     hidden: false
 )]
-class MakeServiceCommand extends MakeCommand
+class MakeWebserviceCommand extends MakeCommand
 {
     #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -23,9 +23,9 @@ class MakeServiceCommand extends MakeCommand
         $this->setInput($input);
 
         $filename = $this->getFilename();
-        $stub     = $this->getStub('service');
+        $stub     = $this->getStub('webservice');
 
-        fwrite(STDERR, "Service created successfully...");
+        fwrite(STDERR, "Webservice created successfully...");
 
         return Command::SUCCESS;
     }
