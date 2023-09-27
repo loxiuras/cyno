@@ -117,6 +117,9 @@ class MakeCommand extends Command
 
     public function saveFile(): void
     {
-        file_put_contents($this->getFileLocation(true), $this->stub);
+        file_put_contents(
+            str_replace('/', '\\', $this->getFileLocation(true)),
+            $this->stub,
+        );
     }
 }
