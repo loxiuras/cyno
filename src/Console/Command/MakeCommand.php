@@ -81,6 +81,11 @@ class MakeCommand extends Command
     {
         $filename = $this->input->getArgument('name');
 
+        var_dump(DIRECTORY_SEPARATOR);
+        var_dump(str_contains($filename, DIRECTORY_SEPARATOR));
+        var_dump(explode(DIRECTORY_SEPARATOR, $filename));
+        die;
+
         if (str_contains($filename, DIRECTORY_SEPARATOR)) {
             $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
 
