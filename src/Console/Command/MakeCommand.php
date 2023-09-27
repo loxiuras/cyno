@@ -123,14 +123,13 @@ class MakeCommand extends Command
     public function saveFile(): void
     {
         var_dump($this->getFileDirectoryLocation(true));
+        var_dump($this->getFileLocation(true));
+        die;
 
         if (!file_exists($this->getFileDirectoryLocation(true))) {
             mkdir($this->getFileDirectoryLocation(true));
         }
 
-        file_put_contents(
-            str_replace('/', '\\', $this->getFileLocation(true)),
-            $this->stub,
-        );
+        file_put_contents($this->getFileLocation(true), $this->stub);
     }
 }
