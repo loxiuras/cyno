@@ -1,0 +1,12 @@
+{
+    "name": "loxiuras/cyno",
+    "description": "Cyno Composer Package",
+    "type": "project",
+    "require": {},
+    "bin": ["cyno"],
+    "autoload": {
+        "psr-4": {
+            "Loxiuras\\Cyno\\": "src/"
+        }
+    }
+}
