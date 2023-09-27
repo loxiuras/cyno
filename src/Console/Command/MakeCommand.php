@@ -79,12 +79,7 @@ class MakeCommand extends Command
      */
     private function getFileStructure(): void
     {
-        $filename = $this->input->getArgument('name');
-
-        var_dump(DIRECTORY_SEPARATOR);
-        var_dump(str_contains($filename, DIRECTORY_SEPARATOR));
-        var_dump(explode(DIRECTORY_SEPARATOR, $filename));
-        die;
+        $filename = str_replace('\\', DIRECTORY_SEPARATOR, $this->input->getArgument('name');
 
         if (str_contains($filename, DIRECTORY_SEPARATOR)) {
             $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
@@ -129,11 +124,7 @@ class MakeCommand extends Command
 
     public function saveFile(): void
     {
-        var_dump($this->getFileDirectoryLocation(true));
-        var_dump($this->getFileLocation(true));
-        die;
-
-        if (!file_exists($this->getFileDirectoryLocation(true))) {
+        if (!is_dir($this->getFileDirectoryLocation(true))) {
             mkdir($this->getFileDirectoryLocation(true));
         }
 
