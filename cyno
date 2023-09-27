@@ -6,5 +6,5 @@ if (\PHP_VERSION_ID < 80000) {
     exit(1);
 }
 
-var_dump($_SERVER);
+var_dump(getenv('COMPOSER_VENDOR_DIR '));
 die;
