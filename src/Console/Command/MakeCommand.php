@@ -127,7 +127,7 @@ class MakeCommand extends Command
         var_dump($this->getFileDirectoryLocation(true));
 
         if (!is_dir($this->getFileDirectoryLocation(true))) {
-            mkdir($this->getFileDirectoryLocation(true));
+            mkdir($this->getFileDirectoryLocation(true), 0777, true);
         }
 
         file_put_contents($this->getFileLocation(true), $this->stub);
