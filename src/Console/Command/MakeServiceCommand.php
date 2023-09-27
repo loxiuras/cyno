@@ -24,8 +24,6 @@ class MakeServiceCommand extends MakeCommand
     {
         $this->setup($input);
 
-        fwrite(STDERR, "Service created successfully...");
-
         return Command::SUCCESS;
     }
 }

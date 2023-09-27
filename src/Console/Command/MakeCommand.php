@@ -31,6 +31,10 @@ class MakeCommand extends Command
         $this->getFileStructure();
 
         $this->validateFileLocation();
+
+        $this->saveFile();
+
+        fwrite(STDERR, '[SUCCESS] ' . ucfirst($this->attribute) . ' [' . $this->getFileLocation(true) . '] created successfully.');
     }
 
     private function getFileLocation(bool $includeComposeLocation = false): string
@@ -71,8 +75,23 @@ class MakeCommand extends Command
     private function validateFileLocation(): void
     {
         if (file_exists($this->getFileLocation(true))) {
-            fwrite(STDERR, '[ERRPR] ' . ucfirst($this->attribute) . ' already exists.');
+            fwrite(STDERR, '[ERROR] ' . ucfirst($this->attribute) . ' already exists.');
             exit(Command::FAILURE);
         }
+    }
+
+    private function saveFile(): void
+    {
+        $path = __DIR__ . '/../../../stubs/' . $this->attribute . '.stub';
+
+        if (!file_exists($path)) {
+            fwrite(STDERR, '[ERROR] ' . ucfirst($this->attribute) . ' isn\'t available.');
+            exit(Command::FAILURE);
+        }
+
+        $stub = file_get_contents($path);
+        $stub = str_replace('%namespace%', 'Cyno/BusinessLogic/Schade', $stub);
+
+        file_put_contents($this->getFileLocation(true), $stub);
     }
 }
