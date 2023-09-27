@@ -79,6 +79,12 @@ class MakeCommand extends Command
     {
         $filename = str_replace('\\', DIRECTORY_SEPARATOR, $this->input->getArgument('name'));
 
+        var_dump($filename);
+        var_dump(explode(DIRECTORY_SEPARATOR, $filename));
+        die;
+
+
+
         $fileStructure = explode(DIRECTORY_SEPARATOR, $filename);
         if (count($fileStructure) > 1) {
             $fileIndex = count($fileStructure) - 1;
