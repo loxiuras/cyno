@@ -3,11 +3,14 @@
     "description": "Cyno Composer Package",
     "type": "project",
     "require": {},
-    "bin": ["cyno/cyno.php"],
+    "bin": ["cyno"],
     "autoload": {
         "psr-4": {
-            "Loxiuras\\Cyno\\": "src/"
+            "Cyno\\": "src/"
         }
+    },
+    "scripts": {
+        "cyno": "echo 'Hello'"
     },
     "minimum-stability": "stable"
 }
