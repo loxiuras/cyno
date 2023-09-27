@@ -13,7 +13,7 @@ class MakeCommand extends Command
     public function validateFilename(string $filename): string
     {
         if (str_ends_with($filename, '.php')) {
-            return substr($filename, -4, 0);
+            return substr($filename, 0, -4);
         }
 
         return $filename;
