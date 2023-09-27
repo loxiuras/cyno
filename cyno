@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Cyno\Console\Application;
 
 if (\PHP_VERSION_ID < 80000) {
