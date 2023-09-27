@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace %namespace%;
+
+use Cyno\Framework\Service\AbstractCyno;
+
+class %serviceName% extends AbstractCyno
+{
+
+}

@@ -15,11 +15,15 @@ use Symfony\Component\Console\Output\OutputInterface;
     description: 'Creates a new service file.',
     hidden: false
 )]
-class MakeServiceCommand extends Command
+class MakeServiceCommand extends MakeCommand
 {
     #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $stub = $this->getFetchStub('service');
+
+        var_dump($stub);
+            die;
 
         return Command::SUCCESS;
     }
