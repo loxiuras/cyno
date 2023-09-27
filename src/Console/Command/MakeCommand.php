@@ -14,8 +14,10 @@ class MakeCommand extends Command
 
     private InputInterface $input;
     protected string $attribute;
+    protected bool $customStubProcessing = false;
     protected string $filename;
     protected array $fileDirectories = [];
+    protected string $stub = '';
 
     public function configure(): void
     {
@@ -32,7 +34,11 @@ class MakeCommand extends Command
 
         $this->validateFileLocation();
 
-        $this->saveFile();
+        $this->prepareStub();
+
+        if ($this->customStubProcessing) {
+            $this->saveFile();
+        }
 
         fwrite(STDERR, '[SUCCESS] ' . ucfirst($this->attribute) . ' [' . $this->getFileLocation(true) . '] created successfully.');
     }
@@ -88,7 +94,7 @@ class MakeCommand extends Command
         }
     }
 
-    private function saveFile(): void
+    private function prepareStub(): void
     {
         $path = __DIR__ . '/../../../stubs/' . $this->attribute . '.stub';
 
@@ -98,9 +104,14 @@ class MakeCommand extends Command
         }
 
         $stub = file_get_contents($path);
-        $stub = str_replace('%namespace%', 'Cyno/BusinessLogic/Schade', $stub);
+        $stub = str_replace('%namespace%', 'Cyno\BusinessLogic\Schade', $stub);
         $stub = str_replace('%classname%', $this->getPostfixedFilename(), $stub);
 
-        file_put_contents($this->getFileLocation(true), $stub);
+        $this->stub = $stub;
+    }
+
+    public function saveFile(): void
+    {
+        file_put_contents($this->getFileLocation(true), $this->stub);
     }
 }
