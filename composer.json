@@ -8,5 +8,6 @@
         "psr-4": {
             "Loxiuras\\Cyno\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }
