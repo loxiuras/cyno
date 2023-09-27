@@ -38,10 +38,10 @@ class MakeCommand extends Command
         $location = $includeComposeLocation ? __DIR__ : '';
 
         if (count($this->fileDirectories) > 0) {
-            $location = implode('/', $this->fileDirectories);
+            $location = implode('/', $this->fileDirectories) . '/';
         }
 
-        return $location . '/' . $this->filename . self::FILE_EXTENSION;
+        return $location . $this->filename . self::FILE_EXTENSION;
     }
 
     /**
